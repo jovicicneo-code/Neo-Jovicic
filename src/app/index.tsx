@@ -1,222 +1,439 @@
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
-  ScrollView,
-  TouchableOpacity,
   StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
   StatusBar,
-} from 'react-native';
-
-const slike = {
-  domov:
-    'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=1000',
-  jezero:
-    'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1000',
-  gozd:
-    'https://images.unsplash.com/photo-1448375240586-882707db888b?w=1000',
-  gore:
-    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1000',
-};
+  Linking,
+} from "react-native";
 
 export default function App() {
-  const [stran, setStran] = useState('Domov');
+  const [page, setPage] = useState("Domov");
 
   return (
-    <View style={s.container}>
+    <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
 
-      <View style={s.header}>
-        <Text style={s.logo}>🌿 WILD CAMP</Text>
-        <Text style={s.headerText}>Tvoj svet narave</Text>
+      {/* HEADER */}
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.logo}>FITNES IN ŠPORT</Text>
+          <Text style={styles.headerTitle}>{page}</Text>
+        </View>
+        <Text style={styles.headerMark}>NJ</Text>
       </View>
 
-      <ScrollView
-        style={s.scroll}
-        contentContainerStyle={s.content}
-        showsVerticalScrollIndicator={false}
-      >
-        {stran === 'Domov' && (
-          <>
-            <Text style={s.nadnaslov}>POBEG V NARAVO</Text>
-            <Text style={s.title}>Odkrij čar kampiranja</Text>
+      <ScrollView contentContainerStyle={styles.content}>
 
+        {/* DOMOV */}
+        {page === "Domov" && (
+          <>
             <Image
-              source={{ uri: slike.domov }}
-              style={s.hero}
+              source={{
+                uri: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1000",
+              }}
+              style={styles.mainImage}
             />
 
-            <Text style={s.subtitle}>
-              Najlepše zgodbe se začnejo na prostem. ⛺
-            </Text>
+            <View style={styles.card}>
+              <Text style={styles.label}>DOBRODOŠLI</Text>
 
-            <Text style={s.text}>
-              Dobrodošel v svetu kampiranja in narave!
-              Tukaj lahko spoznaš čudovite kraje, uživaš
-              v svežem zraku in odkriješ, kako zabavno
-              je preživljati čas na prostem.
-            </Text>
+              <Text style={styles.title}>
+                POZDRAVLJENI K MOJI MOBILNI APLIKACIJI!
+              </Text>
 
-            <Text style={s.sectionTitle}>Kaj te čaka?</Text>
+              <Text style={styles.paragraph}>
+                Dobrodošli v moji mobilni aplikaciji. Aplikacija
+                je namenjena predstavitvi mojih hobijev,
+                zanimanj in aktivnosti, ki jih rad počnem
+                v prostem času.
+              </Text>
 
-            <View style={s.infoCard}>
-              <Text style={s.cardEmoji}>⛺</Text>
-              <View style={s.cardText}>
-                <Text style={s.cardTitle}>Kampiranje</Text>
-                <Text style={s.textSmall}>
-                  Šotori, taborni ogenj in noči pod zvezdami.
+              <Text style={styles.paragraph}>
+                Glavni temi aplikacije sta fitnes in kuhanje.
+                Predstavil bom, zakaj rad obiskujem fitnes,
+                kako pomembni so pravilna izvedba vaj,
+                ogrevanje, hidracija in počitek.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Poleg fitnesa me zanima tudi kuhanje.
+                Rad pripravljam različne jedi, predvsem
+                pečenega lososa, gobovo juho in solate.
+                Predstavil bom tudi nekaj osnovnih pravil
+                za pripravo hrane in higieno v kuhinji.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Če te zanima fitnes, lahko v aplikaciji
+                najdeš nekaj začetnih nasvetov, ki ti
+                pomagajo pri prvih korakih. Pomembno je,
+                da začneš postopoma, se naučiš pravilne
+                tehnike in si vzameš dovolj časa za počitek.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Moj namen je pokazati, da lahko vsak najde
+                aktivnost, v kateri uživa. Ni pomembno,
+                da si takoj odličen, ampak da se učiš,
+                napreduješ in pri tem uživaš.
+              </Text>
+
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => setPage("Moji hobiji")}
+              >
+                <Text style={styles.buttonText}>
+                  Oglej si moje hobije
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.smallCards}>
+              <View style={styles.smallCard}>
+                <Text style={styles.number}>01</Text>
+                <Text style={styles.cardTitle}>Fitnes</Text>
+                <Text style={styles.smallText}>
+                  Vadba, gibanje in dobro počutje.
+                </Text>
+              </View>
+
+              <View style={styles.smallCard}>
+                <Text style={styles.number}>02</Text>
+                <Text style={styles.cardTitle}>Kuhanje</Text>
+                <Text style={styles.smallText}>
+                  Priprava različnih domačih jedi.
                 </Text>
               </View>
             </View>
 
-            <View style={s.infoCard}>
-              <Text style={s.cardEmoji}>🏞️</Text>
-              <View style={s.cardText}>
-                <Text style={s.cardTitle}>Raziskovanje narave</Text>
-                <Text style={s.textSmall}>
-                  Gozdovi, gore, jezera in svež zrak.
+            <View style={styles.card}>
+              <Text style={styles.title}>Center Gibanja</Text>
+
+              <Text style={styles.paragraph}>
+                Eden izmed fitnes centrov v Velenju je
+                Center Gibanja, katerega jaz tudi obiskujem. Na njihovi spletni strani
+                lahko izveš več o fitnesu, opremi in
+                različnih programih vadbe. 
+              </Text>
+
+              <View style={styles.logoBox}>
+                <Text style={styles.centerLogo}>CENTER</Text>
+                <Text style={styles.centerLogoBlue}>GIBANJA</Text>
+                <Text style={styles.centerSub}>
+                  VELENJE
                 </Text>
               </View>
-            </View>
 
-            <View style={s.infoCard}>
-              <Text style={s.cardEmoji}>🎒</Text>
-              <View style={s.cardText}>
-                <Text style={s.cardTitle}>Priprava na izlet</Text>
-                <Text style={s.textSmall}>
-                  Preveri, kaj potrebuješ za kampiranje.
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() =>
+                  Linking.openURL("https://www.centergibanja.com/")
+                }
+              >
+                <Text style={styles.buttonText}>
+                  Obišči Center Gibanja
                 </Text>
-              </View>
+              </TouchableOpacity>
             </View>
-
-            <TouchableOpacity
-              style={s.button}
-              onPress={() => setStran('Kampiranje')}
-            >
-              <Text style={s.buttonText}>Razišči več →</Text>
-            </TouchableOpacity>
           </>
         )}
 
-        {stran === 'Kampiranje' && (
+        {/* MOJI HOBIJI */}
+        {page === "Moji hobiji" && (
           <>
-            <Text style={s.nadnaslov}>NASVETI IN IDEJE</Text>
-            <Text style={s.title}>Kampiranje in narava</Text>
-
-            <Text style={s.text}>
-              Kampiranje je odličen način, da se odklopiš
-              od vsakdanjega življenja. S prijatelji ali
-              družino lahko postaviš šotor, raziskuješ
-              okolico in uživaš v miru narave.
+            <Text style={styles.intro}>
+              V prostem času se najraje ukvarjam s fitnesom
+              in kuhanjem. To sta dejavnosti, ki me sproščata,
+              zanimata in mi omogočata, da se naučim
+              vedno nekaj novega.
             </Text>
 
-            <Image source={{ uri: slike.jezero }} style={s.photo} />
-            <Text style={s.subtitle}>🏕️ Izberi pravi prostor</Text>
-            <Text style={s.text}>
-              Šotor postavi na dovoljenem kampirnem mestu,
-              na ravni podlagi in stran od nevarnih območij.
-              Pred odhodom preveri vreme in lokalna pravila.
-            </Text>
+            <Image
+              source={{
+                uri: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1000",
+              }}
+              style={styles.articleImage}
+            />
 
-            <Image source={{ uri: slike.gozd }} style={s.photo} />
-            <Text style={s.subtitle}>🎒 Kaj vzeti s seboj?</Text>
-            <View style={s.checklist}>
-              {[
-                'Šotor in spalna vreča',
-                'Podloga za spanje',
-                'Svetilka in rezervne baterije',
-                'Voda in hrana',
-                'Primerna oblačila in obutev',
-                'Komplet prve pomoči',
-                'Vrečke za odpadke',
-              ].map((item, index) => (
-                <Text key={index} style={s.listItem}>
-                  ✓  {item}
-                </Text>
-              ))}
+            <View style={styles.card}>
+              <Text style={styles.title}>
+                Moje zanimanje za fitnes
+              </Text>
+
+              <Text style={styles.paragraph}>
+                V prostem času zelo rad hodim v fitnes.
+                Všeč mi je, ker lahko skrbim za zdravo telo,
+                telesno pripravljenost in svoj physique.
+                Vadba mi pomaga tudi pri sproščanju,
+                saj se po treningu počutim boljše.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Pri fitnesu mi je pomembno, da napredujem
+                postopoma in da se naučim pravilno izvajati
+                različne vaje. Ne gre samo za dvigovanje
+                uteži, ampak tudi za disciplino, vztrajnost
+                in skrb za svoje zdravje.
+              </Text>
             </View>
 
-            <Image source={{ uri: slike.gore }} style={s.photo} />
-            <Text style={s.subtitle}>🌲 Varujmo naravo</Text>
-            <Text style={s.text}>
-              Odpadke vedno pospravi za seboj, ne vznemirjaj
-              živali in ne poškoduj rastlin. Ogenj zakuri
-              samo tam, kjer je to dovoljeno in varno.
-              Naravo pustimo takšno, kot smo jo našli.
-            </Text>
-          </>
-        )}
+            <Image
+              source={{
+                uri: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1000",
+              }}
+              style={styles.articleImage}
+            />
 
-        {stran === 'O meni' && (
-          <>
-            <Text style={s.nadnaslov}>AVTOR APLIKACIJE</Text>
-            <Text style={s.title}>Nekaj o meni</Text>
+            <View style={styles.card}>
+              <Text style={styles.title}>
+                Pravilna izvedba vaj
+              </Text>
 
-            <View style={s.avatar}>
-              <Text style={s.avatarEmoji}>🌲</Text>
+              <Text style={styles.paragraph}>
+                Pri vadbi je zelo pomembno, da se naučimo
+                pravilne izvedbe vaj. Če vajo izvajamo
+                nepravilno ali uporabljamo preveliko
+                obremenitev, lahko pride do poškodbe.
+                Zato je dobro, da začetniki prosijo
+                trenerja za pomoč in nasvet.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Pomembno je tudi, da se pred treningom
+                dobro ogrejemo. Ogrevanje pripravi telo
+                na gibanje in pomaga zmanjšati možnost
+                poškodb. Za začetek lahko uporabimo
+                nekaj minut lahke hoje ali kolesarjenja
+                ter preproste dinamične vaje.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Med vadbo ne smemo pozabiti na hidracijo.
+                Redno pitje vode pomaga ohranjati dobro
+                počutje med treningom. Po zahtevnejših
+                vajah si vzamemo dovolj časa za počitek.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Pri težjih serijah lahko počivamo tudi
+                3 do 5 minut, če to potrebujemo za dobro
+                izvedbo naslednje serije. Počitek je
+                odvisen od vrste vaje in intenzivnosti.
+              </Text>
             </View>
 
-            <Text style={s.name}>Neo Jovicic</Text>
-            <Text style={s.role}>Avtor aplikacije Wild Camp</Text>
+            <View style={styles.card}>
+              <Text style={styles.title}>
+                Začetniški trening
+              </Text>
 
-            <Text style={s.sectionTitle}>Živjo! 👋</Text>
-            <Text style={s.text}>
-              Ime mi je Neo Jovičić. Prihajam iz Velenja in
-              obiskujem 3. letnik računalniške šole. 
-              
+              <Text style={styles.paragraph}>
+                Za začetnike je dobra izbira preprost
+                trening celega telesa, pri katerem se
+                naučimo osnovnih gibov. Začnemo lahko
+                z lažjimi obremenitvami in eno ali dvema
+                serijama vaj. Število ponovitev prilagodimo
+                svojim sposobnostim in pravilni tehniki.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Pogosto omenjen program je tudi Push,
+                Pull, Legs oziroma PPL. Push je namenjen
+                potisnim mišičnim skupinam, Pull vlečnim,
+                Legs pa mišicam nog. Takšna razdelitev
+                je ena izmed možnosti treninga, vendar
+                ni nujno najboljša izbira za vsakega
+                začetnika.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Najbolj pomembno je, da ne hitimo,
+                poslušamo svoje telo in si med treningi
+                zagotovimo dovolj počitka.
+              </Text>
+            </View>
+
+            <Image
+              source={require("../../assets/images/Solata.jpg")}
             
-            </Text>
+              
+              style={styles.articleImage}
+            />
 
-            <Text style={s.sectionTitle}>Zakaj ta aplikacija?</Text>
-            <Text style={s.text}>
-              Ustvaril sem to Aplikacijo zato ker sem
-              Želel predstaviti lepote narave ter
-              pokazati, kaj vse potrebujemo za kampiranje.
-              Aplikacijo sem pripravil v okolju Expo
-              z uporabo React Native.
-            </Text>
+            <View style={styles.card}>
+              <Text style={styles.title}>
+                Moje zanimanje za kuhanje
+              </Text>
 
-            <Text style={s.sectionTitle}>Moj cilj 🌍</Text>
-            <Text style={s.text}>
-              Spodbuditi ljudi, da več časa preživijo
-              na prostem, odkrivajo nove kraje in
-              spoštujejo naravo.
-            </Text>
+              <Text style={styles.paragraph}>
+                Poleg fitnesa zelo rad tudi kuham.
+                Všeč mi je pripravljanje različnih jedi
+                in preizkušanje novih receptov. Najraje
+                pečem lososa, pripravljam gobovo juho
+                in različne vrste solat.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Pri kuhanju rad uporabljam sveže sestavine
+                in kombiniram različne okuse. Pomembno
+                se mi zdi, da je hrana okusna, raznolika
+                in lepo pripravljena.
+              </Text>
+            </View>
+
+            <View style={styles.card}>
+              <Text style={styles.title}>
+                Prehrana in fitnes
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Če se ukvarjamo s fitnesom, je dobro
+                poskrbeti za raznoliko in uravnoteženo
+                prehrano. Pomembna so živila, kot so
+                piščanec, ribe, jajca, stročnice,
+                zelenjava, sadje in različna žita.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Beljakovine so pomembne za obnovo mišic,
+                ogljikovi hidrati pa nam zagotavljajo
+                energijo za vsakodnevne aktivnosti
+                in trening. Pomembne so tudi zdrave
+                maščobe ter dovolj tekočine.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Dobro je omejiti pogosto pitje sladkih
+                pijač in uživanje velikih količin sladkarij.
+                To pa ne pomeni, da si nikoli ne smemo
+                privoščiti bonbonov, sladice ali svoje
+                najljubše hrane. Pomembna je predvsem
+                raznolikost in ravnovesje.
+              </Text>
+            </View>
+
+            <View style={styles.card}>
+              <Text style={styles.title}>
+                Higiena in organizacija v kuhinji
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Pred začetkom kuhanja si vedno pripravim
+                vse potrebne sestavine in kuhinjske
+                pripomočke. Tako imam vse na dosegu roke
+                in lahko kuham bolj organizirano.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Zelo pomembna je higiena. Pred pripravo
+                hrane si temeljito umijem roke, očistim
+                delovno površino in uporabim čisto posodo.
+                Pri pripravi surovega mesa pazim tudi,
+                da ne pride v stik z že pripravljeno hrano.
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Ko končam s kuhanjem, vedno pospravim
+                kuhinjo za sabo. Pomijem posodo, očistim
+                kuhinjski pult, pospravim sestavine
+                in uredim pripomočke. Tako je kuhinja
+                čista in pripravljena za naslednje kuhanje.
+              </Text>
+            </View>
+
+            <View style={styles.note}>
+              <Text style={styles.cardTitle}>
+                Zaključek
+              </Text>
+
+              <Text style={styles.paragraph}>
+                Fitnes in kuhanje sta moja najljubša
+                hobija. Pri fitnesu skrbim za gibanje
+                in dobro počutje, pri kuhanju pa lahko
+                ustvarjam in preizkušam nove jedi.
+                Menim, da je pomembno najti ravnovesje
+                med aktivnostjo, prehrano in počitkom.
+              </Text>
+            </View>
           </>
+        )}
+
+        {/* O MENI */}
+        {page === "O meni" && (
+          <View style={styles.card}>
+            <Image
+              source={require("../../assets/images/Neo.jpg")}
+              style={styles.profileImage}
+            />
+
+            <Text style={styles.label}>
+              AVTOR APLIKACIJE
+            </Text>
+
+            <Text style={styles.title}>
+              Neo Jovičić
+            </Text>
+
+            <Text style={styles.paragraph}>
+              Ime mi je Neo Jovičić, star sem 17 let
+              in obiskujem 3. letnik računalništva
+              na Šolskem centru Velenje.
+            </Text>
+
+            <Text style={styles.paragraph}>
+              V prostem času se rad ukvarjam s fitnesom
+              in kuhanjem. Zanimajo me tudi računalništvo,
+              tehnologija in ustvarjanje novih stvari.
+            </Text>
+
+            <View style={styles.separator} />
+
+            <Text style={styles.label}>
+              MOJI INTERESI
+            </Text>
+
+            <Text style={styles.interest}>
+              Računalništvo
+            </Text>
+
+            <Text style={styles.interest}>
+              Fitnes in šport
+            </Text>
+
+            <Text style={styles.interest}>
+              Kuhanje
+            </Text>
+          </View>
         )}
       </ScrollView>
 
-      <View style={s.nav}>
-        {[
-          { ime: 'Domov', ikona: '⌂' },
-          { ime: 'Kampiranje', ikona: '⛺' },
-          { ime: 'O meni', ikona: '☺' },
-        ].map((item) => (
+      {/* SPODNJA NAVIGACIJA */}
+      <View style={styles.navigation}>
+        {["Domov", "Moji hobiji", "O meni"].map((item) => (
           <TouchableOpacity
-            key={item.ime}
-            style={[
-              s.navItem,
-              stran === item.ime && s.navActive,
-            ]}
-            onPress={() => setStran(item.ime)}
+            key={item}
+            style={styles.navItem}
+            onPress={() => setPage(item)}
           >
+            <View
+              style={[
+                styles.navLine,
+                page === item && styles.activeLine,
+              ]}
+            />
+
             <Text
               style={[
-                s.navIcon,
-                stran === item.ime && s.navSelected,
+                styles.navText,
+                page === item && styles.activeText,
               ]}
             >
-              {item.ikona}
-            </Text>
-            <Text
-              style={[
-                s.navLabel,
-                stran === item.ime && s.navSelected,
-              ]}
-            >
-              {item.ime}
+              {item}
             </Text>
           </TouchableOpacity>
         ))}
@@ -225,191 +442,237 @@ export default function App() {
   );
 }
 
-const s = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F6EF',
+    backgroundColor: "#F4F7FB",
   },
+
   header: {
-    paddingTop: 52,
+    paddingTop: 55,
     paddingHorizontal: 22,
-    paddingBottom: 17,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E6E9DF',
+    paddingBottom: 18,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
+
   logo: {
-    color: '#285C3B',
-    fontSize: 20,
-    fontWeight: '900',
-    letterSpacing: 1.5,
-  },
-  headerText: {
-    color: '#788477',
-    fontSize: 13,
-    marginTop: 4,
-  },
-  scroll: {
-    flex: 1,
-  },
-  content: {
-    padding: 20,
-    paddingBottom: 30,
-  },
-  nadnaslov: {
-    color: '#68835C',
-    fontSize: 12,
-    fontWeight: '800',
+    fontSize: 11,
+    color: "#2864D8",
+    fontWeight: "bold",
     letterSpacing: 2,
-    marginBottom: 8,
   },
-  title: {
-    color: '#203D2B',
-    fontSize: 30,
-    fontWeight: '900',
-    marginBottom: 18,
+
+  headerTitle: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#182230",
+    marginTop: 5,
   },
-  hero: {
-    width: '100%',
-    height: 235,
-    borderRadius: 20,
-    marginBottom: 12,
-    backgroundColor: '#DCE5D7',
-  },
-  photo: {
-    width: '100%',
-    height: 205,
-    borderRadius: 17,
-    marginTop: 12,
-    marginBottom: 10,
-    backgroundColor: '#DCE5D7',
-  },
-  subtitle: {
-    color: '#315E3D',
-    fontSize: 19,
-    fontWeight: '800',
-    marginTop: 8,
-    marginBottom: 8,
-  },
-  sectionTitle: {
-    color: '#203D2B',
-    fontSize: 21,
-    fontWeight: '800',
-    marginTop: 22,
-    marginBottom: 10,
-  },
-  text: {
-    color: '#505B50',
-    fontSize: 15,
-    lineHeight: 24,
-    marginBottom: 12,
-  },
-  infoCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    padding: 15,
-    marginBottom: 11,
-  },
-  cardEmoji: {
-    fontSize: 31,
-    marginRight: 14,
-  },
-  cardText: {
-    flex: 1,
-  },
-  cardTitle: {
-    color: '#294A32',
+
+  headerMark: {
+    backgroundColor: "#E8F0FF",
+    color: "#2864D8",
+    fontWeight: "bold",
     fontSize: 16,
-    fontWeight: '800',
-    marginBottom: 4,
-  },
-  textSmall: {
-    color: '#687268',
-    fontSize: 13,
-    lineHeight: 19,
-  },
-  button: {
-    backgroundColor: '#326746',
-    padding: 16,
-    borderRadius: 14,
-    alignItems: 'center',
-    marginTop: 12,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '800',
-  },
-  checklist: {
-    backgroundColor: '#FFFFFF',
-    padding: 16,
-    borderRadius: 15,
-    marginBottom: 12,
-  },
-  listItem: {
-    color: '#435344',
-    fontSize: 15,
-    lineHeight: 30,
-  },
-  avatar: {
-    width: 115,
-    height: 115,
-    borderRadius: 58,
-    backgroundColor: '#DCE9D7',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 8,
-    marginBottom: 15,
-  },
-  avatarEmoji: {
-    fontSize: 58,
-  },
-  name: {
-    color: '#23452E',
-    fontSize: 26,
-    fontWeight: '900',
-    textAlign: 'center',
-  },
-  role: {
-    color: '#788477',
-    textAlign: 'center',
-    fontSize: 14,
-    marginTop: 6,
-    marginBottom: 12,
-  },
-  nav: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    borderTopWidth: 1,
-    borderTopColor: '#E4E8DF',
-    paddingTop: 9,
-    paddingBottom: 20,
-    paddingHorizontal: 8,
-  },
-  navItem: {
-    flex: 1,
-    alignItems: 'center',
-    paddingVertical: 7,
+    padding: 12,
     borderRadius: 12,
   },
-  navActive: {
-    backgroundColor: '#EAF1E6',
+
+  content: {
+    padding: 18,
+    paddingBottom: 30,
   },
-  navIcon: {
-    fontSize: 22,
-    color: '#788477',
-    marginBottom: 3,
+
+  mainImage: {
+    width: "100%",
+    height: 200,
+    borderRadius: 16,
+    marginBottom: 16,
   },
-  navLabel: {
-    color: '#788477',
+
+  articleImage: {
+    width: "100%",
+    height: 185,
+    borderRadius: 15,
+    marginBottom: 15,
+  },
+
+  profileImage: {
+    width: "100%",
+    height: 250,
+    borderRadius: 15,
+    marginBottom: 20,
+  },
+
+  card: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 17,
+    padding: 20,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "#E4EAF2",
+  },
+
+  label: {
+    color: "#2864D8",
+    fontSize: 10,
+    fontWeight: "bold",
+    letterSpacing: 1.3,
+    marginBottom: 9,
+  },
+
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#182230",
+    marginBottom: 10,
+  },
+
+  intro: {
+    color: "#667085",
+    fontSize: 15,
+    lineHeight: 25,
+    marginBottom: 18,
+  },
+
+  paragraph: {
+    color: "#667085",
+    fontSize: 14,
+    lineHeight: 23,
+    marginBottom: 12,
+  },
+
+  button: {
+    backgroundColor: "#2864D8",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 9,
+    alignSelf: "flex-start",
+    marginTop: 5,
+  },
+
+  buttonText: {
+    color: "#FFFFFF",
+    fontWeight: "bold",
+  },
+
+  smallCards: {
+    flexDirection: "row",
+    marginBottom: 15,
+  },
+
+  smallCard: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
+    padding: 15,
+    borderWidth: 1,
+    borderColor: "#E4EAF2",
+    marginRight: 6,
+  },
+
+  number: {
+    color: "#2864D8",
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+
+  cardTitle: {
+    color: "#182230",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+
+  smallText: {
+    color: "#667085",
     fontSize: 12,
-    fontWeight: '600',
+    lineHeight: 18,
   },
-  navSelected: {
-    color: '#285C3B',
-    fontWeight: '900',
+
+  note: {
+    backgroundColor: "#E8F0FF",
+    padding: 18,
+    borderRadius: 15,
+    marginBottom: 15,
+  },
+
+  logoBox: {
+    backgroundColor: "#F4F7FB",
+    borderRadius: 12,
+    padding: 20,
+    alignItems: "center",
+    marginBottom: 15,
+  },
+
+  centerLogo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#182230",
+    letterSpacing: 3,
+  },
+
+  centerLogoBlue: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#2864D8",
+    letterSpacing: 3,
+  },
+
+  centerSub: {
+    fontSize: 11,
+    color: "#667085",
+    letterSpacing: 4,
+    marginTop: 5,
+  },
+
+  separator: {
+    height: 1,
+    backgroundColor: "#E4EAF2",
+    marginVertical: 15,
+  },
+
+  interest: {
+    color: "#182230",
+    fontSize: 14,
+    paddingVertical: 7,
+  },
+
+  navigation: {
+    flexDirection: "row",
+    backgroundColor: "#FFFFFF",
+    borderTopWidth: 1,
+    borderTopColor: "#E4EAF2",
+    paddingBottom: 10,
+    paddingTop: 8,
+  },
+
+  navItem: {
+    flex: 1,
+    alignItems: "center",
+  },
+
+  navLine: {
+    width: 22,
+    height: 3,
+    backgroundColor: "transparent",
+    marginBottom: 7,
+    borderRadius: 5,
+  },
+
+  activeLine: {
+    backgroundColor: "#2864D8",
+  },
+
+  navText: {
+    color: "#667085",
+    fontSize: 12,
+  },
+
+  activeText: {
+    color: "#2864D8",
+    fontWeight: "bold",
   },
 });
